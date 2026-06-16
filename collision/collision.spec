@@ -8,7 +8,7 @@ License:        BSD-2-Clause
 
 URL:            https://apps.gnome.org/Collision/
 Source0:        https://github.com/GeopJr/Collision/archive/refs/tags/v%{version}.tar.gz
-BuildRequires:  crystal shards gobject-introspection-devel make git
+BuildRequires:  crystal gobject-introspection-devel make git
 BuildRequires:  pkgconfig(gtk4) pkgconfig(libadwaita-1) pkgconfig(glib-2.0)
 BuildRequires:  pkgconfig(openssl) pkgconfig(zlib) pkgconfig(libpcre2-8)
 Requires:       dconf gc glib2 glibc gtk4 hicolor-icon-theme libadwaita openssl pcre2 zlib
