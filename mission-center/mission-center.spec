@@ -1,98 +1,69 @@
-%global forgeurl0 https://gitlab.com/mission-center-devs/mission-center
-Version: 1.1.0
-%global tag0 v%{version}
-
-%global forgeurl1 https://gitlab.com/mission-center-devs/gng
-%global commit1 1a8916cfeb06a3d63eefa8b17972eb2988e16da3
-
-
-%forgemeta -a
-
 Name:           mission-center
-Release:        1%?dist
+Version:        1.1.0
+Release:        1%{?dist}
 Summary:        Monitor your CPU, Memory, Disk, Network and GPU usage
-
 License:        GPL-3.0-or-later
-URL:            %{forgeurl0}
-Source0:         %{forgesource0}
-Source1:         %{forgesource1}
-Provides: bundled(mission-center-magpie)
-Provides: bundled(nvtop) = 3.2.0
-#mission centere uses a patched version of nvtop
+URL:            https://missioncenter.io
+Source0:        https://gitlab.com/mission-center-devs/mission-center/-/archive/v%{version}/mission-center-v%{version}.tar.gz
+Source1:        https://gitlab.com/mission-center-devs/gng/-/archive/main/gng-main.tar.gz
+ExclusiveArch:  x86_64
+BuildRequires:  git meson cmake blueprint-compiler cargo rust gcc gettext desktop-file-utils libappstream-glib
+BuildRequires:  pkgconfig(dconf) pkgconfig(gdk-pixbuf-2.0) pkgconfig(glib-2.0) pkgconfig(graphene-1.0)
+BuildRequires:  pkgconfig(gtk4) pkgconfig(libadwaita-1) pkgconfig(protobuf) pkgconfig(libsystemd)
+BuildRequires:  mesa-libGL-devel
+Requires:       dconf dmidecode gdk-pixbuf2 glib2 glibc graphene gtk4 libadwaita mesa-libGL nvtop protobuf systemd-libs
 
-BuildRequires: meson >= 0.63
-BuildRequires: cargo
-BuildRequires: cmake
-BuildRequires: gcc
-BuildRequires:  gcc-c++
-BuildRequires: pkgconfig(protobuf)
-BuildRequires: pkgconfig(python3)
-BuildRequires: pkgconfig(libdrm)
-BuildRequires: pkgconfig(gbm)
-BuildRequires: pkgconfig(libudev)
-BuildRequires: pkgconfig(gtk4)
-BuildRequires: pkgconfig(egl)
-BuildRequires: libadwaita-devel
-BuildRequires: desktop-file-utils
-BuildRequires: blueprint-compiler
-BuildRequires: cargo-rpm-macros >= 24
-BuildRequires: gettext
-BuildRequires: desktop-file-utils
-BuildRequires: appstream-data
-BuildRequires: libappstream-glib
-Recommends: nethogs
 
 %description
-Monitor your CPU, Memory, Disk, Network and GPU usage
+Mission Center is a GTK4/Libadwaita application that lets you monitor
+your CPU, Memory, Disk, Network and GPU usage.
+
 
 
 %prep
-%forgesetup -z 0
-mkdir -p ./subprojects/magpie
-tar -x --strip-components=1  -f %{SOURCE1} -C ./subprojects/magpie
-pushd ./subprojects/magpie/
-%cargo_prep_online
-popd
-%cargo_prep_online
-%{cargo_license_summary_online}
-# %cargo_license_online > LICENSE.dependencies
-#builds is erroring
+%autosetup -n mission-center-v%{version} -N
+tar -xf %{SOURCE1}
+mv gng-main subprojects/magpie
+CARGO_HOME="%{_builddir}/cargo-home" \
+    cargo fetch --target "$(rustc --print host-tuple)"
+cd subprojects/magpie
+CARGO_HOME="%{_builddir}/subprojects/magpie/cargo-home" \
+    cargo fetch --locked --target "$(rustc --print host-tuple)"
+
+
 
 %build
-%meson
-%meson_build
+export CFLAGS="%{optflags} -ffat-lto-objects"
+%meson --buildtype=release
+CARGO_HOME="%{_builddir}/cargo-home" \
+CARGO_PROFILE_RELEASE_LTO=true \
+CARGO_PROFILE_RELEASE_CODEGEN_UNITS=1 \
+CARGO_PROFILE_RELEASE_DEBUG=2 \
+CARGO_PROFILE_RELEASE_STRIP=false \
+    %meson_build
+
 
 
 %install
 %meson_install
-%find_lang missioncenter
+%find_lang %{name}
+
 
 %check
-desktop-file-validate %{buildroot}/%{_datadir}/applications/io.missioncenter.MissionCenter.desktop
-appstream-util validate-relax  %{buildroot}/%{_datadir}/metainfo/io.missioncenter.MissionCenter.metainfo.xml
-%meson_test
-
-# https://gitlab.com/mission-center-devs/mission-center/-/wikis/Home/Nethogs
-%post
-if  command -v nethogs 2>&1 >/dev/null
-then
-     setcap "cap_net_admin,cap_net_raw,cap_dac_read_search,cap_sys_ptrace+pe" "$(which nethogs)"
-fi
+appstream-util validate-relax --nonet %{buildroot}%{_metainfodir}/*.xml
+desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 
 
-%files -f missioncenter.lang
-%doc README.md
+
+%files -f %{name}.lang
 %license COPYING
-#builds is erroring
-# [%]license LICENSE.dependencies
-%{_datadir}/missioncenter/
+%{_bindir}/mission-center
+%{_libexecdir}/mission-center/
+%{_metainfodir}/*.xml
 %{_datadir}/applications/io.missioncenter.MissionCenter.desktop
-%{_datadir}/metainfo/io.missioncenter.MissionCenter.metainfo.xml
 %{_datadir}/glib-2.0/schemas/io.missioncenter.MissionCenter.gschema.xml
 %{_datadir}/icons/hicolor/scalable/apps/io.missioncenter.MissionCenter.svg
 %{_datadir}/icons/hicolor/symbolic/apps/io.missioncenter.MissionCenter-symbolic.svg
-%{_bindir}/missioncenter-magpie
-%{_bindir}/missioncenter
 
 
 %changelog
