@@ -7,7 +7,6 @@ License:        GPL-3.0-or-later
 
 URL:            https://apps.gnome.org/Resources/
 Source0:        https://github.com/nokyan/resources/archive/refs/tags/v%{version}.tar.gz
-
 BuildRequires:  meson cargo rust gcc gettext desktop-file-utils libappstream-glib
 BuildRequires:  pkgconfig(gtk4) pkgconfig(libadwaita-1) pkgconfig(glib-2.0) pkgconfig(graphene-1.0)
 BuildRequires:  pkgconfig(cairo) pkgconfig(polkit-gobject-1)
@@ -22,13 +21,12 @@ GPU, network interfaces, storage devices and batteries.
 
 
 
-
 %prep
 %autosetup -n %{name}-%{version}
 CARGO_HOME="%{_builddir}/cargo-home" \
     cargo fetch --locked --target "$(rustc --print host-tuple)"
-    
-    
+
+
 
 %build
 %meson \
@@ -64,7 +62,10 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_datadir}/icons/hicolor/scalable/apps/net.nokyan.Resources.svg
 %{_datadir}/icons/hicolor/symbolic/apps/net.nokyan.Resources-symbolic.svg
 %{_datadir}/resources/
-
+%{_libexecdir}/resources/resources-adjust
+%{_libexecdir}/resources/resources-kill
+%{_libexecdir}/resources/resources-processes
+%{_datadir}/polkit-1/actions/net.nokyan.Resources.policy
 
 
 %changelog
