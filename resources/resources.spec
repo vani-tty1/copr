@@ -6,7 +6,7 @@ License:        GPL-3.0-or-later
 
 
 URL:            https://apps.gnome.org/Resources/
-Source0:        https://github.com/nokyan/resources/archive/refs/tags/v%{version}.tar.gz
+Source0:        https://gitlab.gnome.org/GNOME/Incubator/resources/-/archive/v%{version}/resources-v%{version}.tar.gz
 BuildRequires:  meson cargo rust gcc gettext desktop-file-utils libappstream-glib
 BuildRequires:  pkgconfig(gtk4) pkgconfig(libadwaita-1) pkgconfig(glib-2.0) pkgconfig(graphene-1.0)
 BuildRequires:  pkgconfig(cairo) pkgconfig(polkit-gobject-1)
