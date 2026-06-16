@@ -19,10 +19,10 @@ Resources allows you to check the utilization of your system resources and
 control your running processes and apps. It supports monitoring CPU, memory,
 GPU, network interfaces, storage devices and batteries.
 
-
+%global archivename %{name}-v%{version}
 
 %prep
-%autosetup -n %{name}-%{version}
+%autosetup -n %{archivename}
 CARGO_HOME="%{_builddir}/cargo-home" \
     cargo fetch --locked --target "$(rustc --print host-tuple)"
 
