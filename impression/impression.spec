@@ -5,10 +5,9 @@ Summary:        Application to create bootable drives from disk images
 License:        GPL-3.0-only
 URL:            https://apps.gnome.org/Impression/
 Source0:        https://gitlab.com/adhami3310/Impression/-/archive/v%{version}/Impression-v%{version}.tar.gz
-ExclusiveArch:  x86_64
 BuildRequires:  meson gcc blueprint-compiler cargo rust gettext desktop-file-utils libappstream-glib
 BuildRequires:  pkgconfig(gtk4) pkgconfig(libadwaita-1) pkgconfig(glib-2.0)
-BuildRequires:  openssl-devel udisks2-devel
+BuildRequires:  openssl-devel libudisks2-devel
 Requires:       dconf glib2 glibc gtk4 hicolor-icon-theme libadwaita openssl-libs udisks2
 
 
