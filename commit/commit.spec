@@ -8,6 +8,8 @@ URL:            https://apps.gnome.org/Commit/
 Source0:        https://github.com/sonnyp/Commit/archive/refs/tags/v%{version}.tar.gz
 Source1:        https://github.com/sonnyp/troll/archive/refs/heads/main/troll-main.tar.gz
 
+BuildArch:      noarch
+%global debug_package %{nil}
 BuildRequires:  meson blueprint-compiler gettext desktop-file-utils libappstream-glib gjs
 BuildRequires:  pkgconfig(gtk4) pkgconfig(libadwaita-1) pkgconfig(gtksourceview-5) pkgconfig(libspelling-1) pkgconfig(libportal-gtk4)
 Requires:       dconf gjs glib2 gtk4 gtksourceview5 hicolor-icon-theme libadwaita libportal libspelling
