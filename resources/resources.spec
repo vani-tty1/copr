@@ -3,7 +3,7 @@ Version:        1.10.2
 Release:        1%{?dist}
 Summary:        Monitor for system resources and processes
 License:        GPL-3.0-or-later
-
+%global archivename %{name}-v%{version}
 
 URL:            https://apps.gnome.org/Resources/
 Source0:        https://gitlab.gnome.org/GNOME/Incubator/resources/-/archive/v%{version}/resources-v%{version}.tar.gz
@@ -19,7 +19,6 @@ Resources allows you to check the utilization of your system resources and
 control your running processes and apps. It supports monitoring CPU, memory,
 GPU, network interfaces, storage devices and batteries.
 
-%global archivename %{name}-v%{version}
 
 %prep
 %autosetup -n %{archivename}
