@@ -48,6 +48,8 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %license COPYING
 %{_bindir}/impression
 %{_metainfodir}/io.gitlab.adhami3310.Impression.metainfo.xml
+%{_datadir}/dbus-1/services/io.gitlab.adhami3310.Impression.service
+%{_datadir}/impression/resources.gresource 
 %{_datadir}/applications/io.gitlab.adhami3310.Impression.desktop
 %{_datadir}/glib-2.0/schemas/io.gitlab.adhami3310.Impression.gschema.xml
 %{_datadir}/icons/hicolor/scalable/apps/io.gitlab.adhami3310.Impression.svg
