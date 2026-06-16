@@ -47,10 +47,9 @@ install -Dm644 -t %{buildroot}%{_datadir}/nautilus-python/extensions/ \
     nautilus-extension/collision-extension.py
 install -Dm644 -t %{buildroot}%{_metainfodir}/ \
     data/dev.geopjr.Collision.metainfo.xml
-    
-    
-    
-%files
+%find_lang %{name}
+
+%files -f %{name}.lang
 %license LICENSE
 %{_bindir}/collision
 %{_datadir}/applications/dev.geopjr.Collision.desktop
