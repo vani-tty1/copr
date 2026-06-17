@@ -6,10 +6,14 @@
 
 ### Available Packages
 
+**GNOME Cirle Apps:**
 - [Collision](https://apps.gnome.org/Collision)
 - [Commit](https://apps.gnome.org/Commit)
 - [Impression](https://apps.gnome.org/Impression)
 - [Resources](https://apps.gnome.org/Resources)
+
+**Non-GNOME Cirle Apps:**
+- [Flatseal](https://github.com/tchx84/Flatseal)
 
 
 ### Installation
