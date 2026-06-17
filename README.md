@@ -6,12 +6,9 @@
 
 ### Available Packages
 
-- [Collision](https://apps.gnome.org/Collion)
-
+- [Collision](https://apps.gnome.org/Collision)
 - [Commit](https://apps.gnome.org/Commit)
-
 - [Impression](https://apps.gnome.org/Impression)
-
 - [Resources](https://apps.gnome.org/Resources)
 
 
