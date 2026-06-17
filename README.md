@@ -3,6 +3,18 @@
  It is not affiliated with the original developer or the Fedora Project.
 
 
+
+### Available Packages
+
+- [Collision](https://apps.gnome.org/Collion)
+
+- [Commit](https://apps.gnome.org/Commit)
+
+- [Impression](https://apps.gnome.org/Impression)
+
+- [Resources](https://apps.gnome.org/Resources)
+
+
 ### Installation
 
 Enable the repository and install the package:
