@@ -43,11 +43,20 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_bindir}/com.github.tchx84.Flatseal
 %license COPYING
 %{_datadir}/applications/*.desktop
+%{_datadir}/dbus-1/services/*.service
 %{_datadir}/flatseal/
+%{_datadir}/glib-2.0/schemas/*.gschema.xml
+%{_datadir}/help/C/flatseal/
 %{_datadir}/icons/hicolor/scalable/apps/*.svg
 %{_datadir}/icons/hicolor/symbolic/apps/*.svg
 %{_datadir}/metainfo/*.xml
+%{_datadir}/locale/*/LC_MESSAGES/flatseal.mo
 
+%post
+glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
+
+%postun
+glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
 
 %changelog
 * Tue Jun 16 2026 Giovanni Rafanan <giovannirafanan609@gmail.com> - 2.4.1-1
