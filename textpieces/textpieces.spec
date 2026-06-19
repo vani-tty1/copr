@@ -19,7 +19,7 @@ text transformations: encoding/decoding, formatting, hashing, and more,
 directly from a GNOME-native interface.
 
 %prep
-%autosetup -p1 -a1
+%autosetup -p1 
 %cargo_prep
 
 %build
