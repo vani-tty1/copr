@@ -6,7 +6,7 @@ Summary:        Powerful scratchpad with ability to perform a lot of text transf
 License:        GPL-3.0-or-later
 URL:            https://apps.gnome.org/TextPieces/
 Source0:        https://gitlab.com/liferooter/textpieces/-/archive/%{version}/textpieces-%{version}.tar.gz
-Source1:        textpieces-activate.patch
+
 
 BuildRequires:  appstream blueprint-compiler cargo-rpm-macros
 BuildRequires:  desktop-file-utils git meson rust-packaging pkgconfig(gtk4) pkgconfig(gtksourceview-5) pkgconfig(libadwaita-1)
